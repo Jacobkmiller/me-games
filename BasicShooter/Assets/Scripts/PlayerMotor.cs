@@ -11,6 +11,7 @@ public class PlayerMotor : MonoBehaviour {
 	private Vector3 velocity = Vector3.zero;
 	private Vector3 rotation = Vector3.zero;
 	private Vector3 cameraRotation = Vector3.zero;
+	private Vector3 jumpVector = Vector3.zero;
 
 	private Rigidbody rb;
 
@@ -35,6 +36,13 @@ public class PlayerMotor : MonoBehaviour {
 	public void RotateCamera (Vector3 _cameraRotation)
 	{
 		cameraRotation = _cameraRotation;
+	}
+
+	// Gets a rotational vector for camera
+	public void Jump (float _jumpForce)
+	{
+		jumpVector = new Vector3(0.0f, 2.0f, 0.0f);
+		rb.AddForce(jumpVector * _jumpForce, ForceMode.Impulse);
 	}
 
 	// Update is called once per frame
