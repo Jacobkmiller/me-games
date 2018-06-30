@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerMotor))]
-public class PlayerMotor : MonoBehaviour {
+public class PlayerController : MonoBehaviour {
 
 	[SerializeField]
 	private float speed = 5f;
@@ -25,7 +25,7 @@ public class PlayerMotor : MonoBehaviour {
 
 		//Final Movement velcoty
 		Vector3 _velocity = (_movHorizontal + _movVertical).normalized * speed;
-		
+		Debug.Log(_velocity);
 		motor.Move(_velocity);
 	}
 }
