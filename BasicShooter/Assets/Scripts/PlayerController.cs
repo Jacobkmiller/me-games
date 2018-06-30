@@ -9,11 +9,19 @@ public class PlayerController : MonoBehaviour {
 	private float speed = 5f;
 	[SerializeField]
 	private float lookSensitivity = 3f;
+	[SerializeField]
+	private float jumpForce = 1.25f;
 	private PlayerMotor motor;
+	private bool isGrounded;
 
 	void Start()
 	{
 		motor = GetComponent<PlayerMotor>();
+	}
+
+	void OnCollisionStay()
+	{
+		isGrounded = true;
 	}
 
 	void Update()
@@ -21,6 +29,12 @@ public class PlayerController : MonoBehaviour {
 		//Calculate movement velocity as a 3D vector
 		float _xMov = Input.GetAxisRaw("Horizontal");
 		float _zMov = Input.GetAxisRaw("Vertical");
+		float _jump = Input.GetAxisRaw("Jump");
+
+		if((_jump > 0) && isGrounded){
+				motor.Jump(jumpForce);
+				isGrounded = false;
+		}
 
 		Vector3 _movHorizontal = transform.right * _xMov;
 		Vector3 _movVertical = transform.forward * _zMov;
