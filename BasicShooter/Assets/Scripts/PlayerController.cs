@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void OnCollisionStay()
-	{
+	{	
 		isGrounded = true;
 	}
 
@@ -31,7 +31,9 @@ public class PlayerController : MonoBehaviour {
 		float _zMov = Input.GetAxisRaw("Vertical");
 		float _jump = Input.GetAxisRaw("Jump");
 
-		if((_jump > 0) && isGrounded){
+
+		if((_jump != 0) && isGrounded){
+				Debug.Log("SPACE!");
 				motor.Jump(jumpForce);
 				isGrounded = false;
 		}
