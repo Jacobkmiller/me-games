@@ -25,7 +25,6 @@ public class PlayerController : MonoBehaviour {
 
 		//Final Movement velcoty
 		Vector3 _velocity = (_movHorizontal + _movVertical).normalized * speed;
-		Debug.Log(_velocity);
 		motor.Move(_velocity);
 	}
 }
