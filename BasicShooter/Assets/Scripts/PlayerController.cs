@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour {
 
 	void OnCollisionStay()
 	{
-			isGrounded = true;
+		isGrounded = true;
 	}
 
 	void Update()
