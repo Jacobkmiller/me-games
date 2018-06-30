@@ -27,8 +27,6 @@ public class PlayerController : MonoBehaviour {
 
 		//Final Movement velcoty
 		Vector3 _velocity = (_movHorizontal + _movVertical).normalized * speed;
-		
-		//Apply movement
 		motor.Move(_velocity);
 
 		//Calculate rotation as a 3D vector (Turning around)
