@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour {
 		Vector3 _rotation = new Vector3(0f, _yRot, 0f) * lookSensitivity;
 
 		//Apply rotation
-		// motor.Rotate(_rotation);
+		motor.Rotate(_rotation);
 
 		//Calculate camera rotation as a 3D vector (Looking around)
 		float _xRot = Input.GetAxisRaw("Mouse Y");
@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour {
 		Vector3 _cameraRotation = new Vector3(_xRot, 0f, 0f) * lookSensitivity;
 		
 		//Apply camera rotation
-		// motor.RotateCamera(_cameraRotation);
+		motor.RotateCamera(_cameraRotation);
 
 	}
 }
