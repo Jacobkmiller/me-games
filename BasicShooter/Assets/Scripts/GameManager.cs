@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour {
 	public MatchSettings matchSettings;
 
 	void Awake() {
-		if (!instance != null){
+		if (instance != null){
 			Debug.LogError("More than one game manager in scene.");
 		} else {
 			instance = this;
