@@ -33,7 +33,6 @@ public class PlayerController : MonoBehaviour {
 
 
 		if((_jump != 0) && isGrounded){
-				Debug.Log("SPACE!");
 				motor.Jump(jumpForce);
 				isGrounded = false;
 		}

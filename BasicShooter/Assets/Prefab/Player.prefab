@@ -75,6 +75,7 @@ GameObject:
   - component: {fileID: 114679947107894766}
   - component: {fileID: 114628027050067018}
   - component: {fileID: 114904498427219972}
+  - component: {fileID: 114339781905915614}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -438,6 +439,25 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1619407797609652}
   m_Enabled: 1
+--- !u!114 &114339781905915614
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1529662365218638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee24d6297639b42c8b86487f885ee180, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon:
+    name: Magnum Dong
+    damage: 10
+    range: 100
+  cam: {fileID: 0}
+  mask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &114561113662169070
 MonoBehaviour:
   m_ObjectHideFlags: 1
