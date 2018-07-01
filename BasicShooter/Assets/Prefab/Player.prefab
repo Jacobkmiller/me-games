@@ -76,6 +76,8 @@ GameObject:
   - component: {fileID: 114628027050067018}
   - component: {fileID: 114904498427219972}
   - component: {fileID: 114339781905915614}
+  - component: {fileID: 114796406920418086}
+  - component: {fileID: 114547306081772190}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -141,7 +143,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1529662365218638}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.748533, y: -0.000009246674, z: 9.0967865}
+  m_LocalPosition: {x: -10.431229, y: -0.00000693672, z: 0.23568869}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4681531127874618}
@@ -440,6 +442,7 @@ AudioListener:
   m_GameObject: {fileID: 1619407797609652}
   m_Enabled: 1
 --- !u!114 &114339781905915614
+--- !u!114 &114547306081772190
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -458,6 +461,17 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 0
+  m_Script: {fileID: -1267208747, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Target: {fileID: 4681531127874618}
+  m_ChildIndex: 0
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 1
+  m_RotationSyncCompression: 0
+  m_MovementThreshold: 0.001
+  m_InterpolateRotation: 0.3
+  m_InterpolateMovement: 0
 --- !u!114 &114561113662169070
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -516,6 +530,27 @@ MonoBehaviour:
   speed: 5
   lookSensitivity: 3
   jumpForce: 1.25
+--- !u!114 &114796406920418086
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1529662365218638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 3
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 2
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 10
+  m_InterpolateMovement: 1
 --- !u!114 &114904498427219972
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -531,6 +566,7 @@ MonoBehaviour:
   - {fileID: 114679947107894766}
   - {fileID: 114628027050067018}
   - {fileID: 20264367565030878}
+  - {fileID: 81368955399813876}
 --- !u!124 &124519381727331272
 Behaviour:
   m_ObjectHideFlags: 1
