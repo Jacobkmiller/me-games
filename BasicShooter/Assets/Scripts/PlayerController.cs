@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour {
 	void Start()
 	{
 		motor = GetComponent<PlayerMotor>();
+    Cursor.visible = false;
+    Cursor.lockState = CursorLockMode.Locked;
 	}
 
 	void OnCollisionStay()
