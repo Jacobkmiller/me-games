@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4438788051902028}
   - component: {fileID: 33656187748237854}
   - component: {fileID: 23636460156389390}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PlayerModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4720288852273476}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   - component: {fileID: 33402690970937116}
   - component: {fileID: 23552394592099372}
   - component: {fileID: 65781950249839782}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,9 +78,9 @@ GameObject:
   - component: {fileID: 114339781905915614}
   - component: {fileID: 114796406920418086}
   - component: {fileID: 114547306081772190}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 20264367565030878}
   - component: {fileID: 124519381727331272}
   - component: {fileID: 81368955399813876}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 33612868629482596}
   - component: {fileID: 23634215305661636}
   - component: {fileID: 65039920603832622}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,7 +129,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4592904118158276}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -442,6 +442,16 @@ AudioListener:
   m_GameObject: {fileID: 1619407797609652}
   m_Enabled: 1
 --- !u!114 &114339781905915614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1529662365218638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114547306081772190
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -457,21 +467,10 @@ MonoBehaviour:
     name: Magnum Dong
     damage: 10
     range: 100
-  cam: {fileID: 0}
+  cam: {fileID: 20264367565030878}
   mask:
     serializedVersion: 2
-    m_Bits: 0
-  m_Script: {fileID: -1267208747, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Target: {fileID: 4681531127874618}
-  m_ChildIndex: 0
-  m_SendInterval: 0.1
-  m_SyncRotationAxis: 1
-  m_RotationSyncCompression: 0
-  m_MovementThreshold: 0.001
-  m_InterpolateRotation: 0.3
-  m_InterpolateMovement: 0
+    m_Bits: 4294967295
 --- !u!114 &114561113662169070
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -567,6 +566,8 @@ MonoBehaviour:
   - {fileID: 114628027050067018}
   - {fileID: 20264367565030878}
   - {fileID: 81368955399813876}
+  - {fileID: 114547306081772190}
+  remoteLayerName: RemotePlayer
 --- !u!124 &124519381727331272
 Behaviour:
   m_ObjectHideFlags: 1
