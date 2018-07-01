@@ -35,6 +35,7 @@ public class PlayerSetup : NetworkBehaviour {
 			playerUIInstance = Instantiate(playerUIPrefab);
 			playerUIInstance.name = playerUIPrefab.name;
 		}
+		GetComponent<Player>().Setup();
 
 	}
 
