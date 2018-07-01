@@ -442,6 +442,16 @@ AudioListener:
   m_GameObject: {fileID: 1619407797609652}
   m_Enabled: 1
 --- !u!114 &114339781905915614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1529662365218638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114547306081772190
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -461,17 +471,6 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 0
-  m_Script: {fileID: -1267208747, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Target: {fileID: 4681531127874618}
-  m_ChildIndex: 0
-  m_SendInterval: 0.1
-  m_SyncRotationAxis: 1
-  m_RotationSyncCompression: 0
-  m_MovementThreshold: 0.001
-  m_InterpolateRotation: 0.3
-  m_InterpolateMovement: 0
 --- !u!114 &114561113662169070
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -516,6 +515,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 20264367565030878}
+  cameraLimit: 80
 --- !u!114 &114679947107894766
 MonoBehaviour:
   m_ObjectHideFlags: 1
