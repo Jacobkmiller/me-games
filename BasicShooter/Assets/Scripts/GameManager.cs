@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	#region Player tracking
-private const string PLAYER_ID_PREFIX = "Player ";
+	private const string PLAYER_ID_PREFIX = "Player ";
 
 	private static Dictionary<string, Player> players = new Dictionary<string, Player>();
 
