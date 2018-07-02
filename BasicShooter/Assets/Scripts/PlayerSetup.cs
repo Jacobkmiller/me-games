@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Player))]
 public class PlayerSetup : NetworkBehaviour {
@@ -74,5 +75,9 @@ public class PlayerSetup : NetworkBehaviour {
 		}
 
 		GameManager.UnRegisterPlayer(transform.name);
+	}
+
+	public void ChangeHealth(int value){
+		playerUIInstance.GetComponentInChildren<Text>().text = value + "%";
 	}
 }
