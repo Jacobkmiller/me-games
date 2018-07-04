@@ -35,7 +35,7 @@ public class PlayerShoot : NetworkBehaviour {
 	void Shoot() {
     		gameObject.GetComponentInChildren<ParticleSystem>().Play();
 				gunSound.PlayOneShot(gunSound.clip, 1);
-				CmdPlayerShooting();
+				CmdPlayWeaponEffects();
 				// TODO: Lets make this a specific weapon
         //shooting using objects
         // the weapon should be doing the shooting
@@ -64,11 +64,11 @@ public class PlayerShoot : NetworkBehaviour {
 	}
 
 	[Command]
-	void CmdPlayerShooting () {
+	void CmdPlayWeaponEffects () {
 		// Debug.Log(_playerID + " has been shot!");
 		var _player = GetComponent<Player>();
 		// Player _player = GameManager.GetPlayer(_playerID);
-		_player.RpcPlayMuzzleFlash();
+		_player.RpcPlayWeaponEffects();
 	}
 
 }
