@@ -43,6 +43,10 @@ public class Player : NetworkBehaviour {
 		}
 	}
 
+	public void playMuzzleFlash() {
+    gameObject.GetComponentInChildren<ParticleSystem>().Play();
+	}
+
 	public GameObject GetPlayerUIInstance() {
 		return playerUIInstance;
 	}

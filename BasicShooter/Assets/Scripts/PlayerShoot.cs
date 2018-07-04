@@ -31,6 +31,7 @@ public class PlayerShoot : NetworkBehaviour {
 	[Client]
 	void Shoot() {
     		gameObject.GetComponentInChildren<ParticleSystem>().Play();
+				CmdPlayerShooting();
 				// TODO: Lets make this a specific weapon
         //shooting using objects
         // the weapon should be doing the shooting
@@ -56,6 +57,14 @@ public class PlayerShoot : NetworkBehaviour {
 
 		Player _player = GameManager.GetPlayer(_playerID);
 		_player.RpcTakeDamage(_damage);
+	}
+
+	[Command]
+	void CmdPlayerShooting () {
+		// Debug.Log(_playerID + " has been shot!");
+		var _player = GetComponent<Player>();
+		// Player _player = GameManager.GetPlayer(_playerID);
+		_player.playMuzzleFlash();
 	}
 
 }
