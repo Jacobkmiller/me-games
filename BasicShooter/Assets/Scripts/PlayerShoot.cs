@@ -16,6 +16,10 @@ public class PlayerShoot : NetworkBehaviour {
 	[SerializeField]
 	private LayerMask mask;
 
+	private Transform dynamic;
+
+	private bool secondaryFireMode = false;
+
 	void Start()
 	{
 		if (cam == null)
@@ -23,34 +27,47 @@ public class PlayerShoot : NetworkBehaviour {
 			Debug.LogError("Player Shoot no camera referenced");
 			this.enabled = false;
 		}
+		if (dynamic == null) {
+			dynamic = GameObject.Find("_Dynamic").transform;
+		}
 	}
 
 	void Update () {
 		if (Input.GetButtonDown("Fire1")) {
 			Shoot();
 		}
+		if (Input.GetButtonDown("ToggleFireMode")) {
+			ToggleFireMode();
+		}
+	}
+
+	private void ToggleFireMode() {
+		secondaryFireMode = !secondaryFireMode;
 	}
 
 	[Client]
 	void Shoot() {
-    		gameObject.GetComponentInChildren<ParticleSystem>().Play();
-				gunSound.PlayOneShot(gunSound.clip, 1);
-				CmdPlayerShooting();
-				// TODO: Lets make this a specific weapon
-        //shooting using objects
-        // the weapon should be doing the shooting
-        // forward firing start location
-        // Vector3 start = cam.transform.position;
-        // start += cam.transform.forward.normalized * 1;
-        // var bullet = (GameObject)Instantiate(weapon.Ammo, start, cam.transform.rotation);
-        // bullet.GetComponent<Rigidbody>().velocity = cam.transform.forward * weapon.Speed;
+		if (secondaryFireMode) {
+			// TODO: Lets make this a specific weapon
+			//shooting using objects
+			// the weapon should be doing the shooting
+			// forward firing start location
+			Vector3 start = cam.transform.position;
+			start += cam.transform.forward.normalized * 1;
+			var bullet = (GameObject)Instantiate(weapon.Ammo, start, cam.transform.rotation, dynamic);
+			bullet.GetComponent<Rigidbody>().velocity = cam.transform.forward * weapon.Speed;
+		} else {
+			gameObject.GetComponentInChildren<ParticleSystem>().Play();
+			gunSound.PlayOneShot(gunSound.clip, 1);
+			CmdPlayWeaponEffects();
 
-        //raycast shooting[old]
-		RaycastHit _hit;
-		if (Physics.Raycast(cam.transform.position, cam.transform.forward, out _hit, weapon.range, mask)) {
-			// We hit something
-			if (_hit.collider.tag == PLAYER_TAG) {
-				CmdPlayerShot(_hit.collider.name, weapon.Damage);
+			//raycast shooting[old]
+			RaycastHit _hit;
+			if (Physics.Raycast(cam.transform.position, cam.transform.forward, out _hit, weapon.range, mask)) {
+				// We hit something
+				if (_hit.collider.tag == PLAYER_TAG) {
+					CmdPlayerShot(_hit.collider.name, weapon.Damage);
+				}
 			}
 		}
 	}
@@ -64,11 +81,11 @@ public class PlayerShoot : NetworkBehaviour {
 	}
 
 	[Command]
-	void CmdPlayerShooting () {
+	void CmdPlayWeaponEffects () {
 		// Debug.Log(_playerID + " has been shot!");
 		var _player = GetComponent<Player>();
 		// Player _player = GameManager.GetPlayer(_playerID);
-		_player.RpcPlayMuzzleFlash();
+		_player.RpcPlayWeaponEffects();
 	}
 
 }

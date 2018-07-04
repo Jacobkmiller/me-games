@@ -47,10 +47,13 @@ public class Player : NetworkBehaviour {
 		playerUI.SetPlayer(this);
 		}
 	}
+
 	[ClientRpc]
-	public void RpcPlayMuzzleFlash() {
+	public void RpcPlayWeaponEffects() {
 		if (!isLocalPlayer){
     		gameObject.GetComponentInChildren<ParticleSystem>().Play();
+			  AudioSource _audiosource = gameObject.GetComponentInChildren<AudioSource>();
+				_audiosource.PlayOneShot(_audiosource.clip, 1);
 		}
 	}
 
