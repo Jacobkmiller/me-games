@@ -1,10 +1,18 @@
 ﻿using UnityEngine;
 
 [System.Serializable]
-public class PlayerWeapon {
+public class PlayerWeapon : MonoBehaviour {
 
+    public GameObject Ammo;
 	public string name = "Magnum Dong";
 
-	public int damage = 10;
+    public int Damage
+    {
+        get { return Ammo.GetComponent<Ammo>().Damage; }
+    }
+    public int Speed
+    {
+        get { return Ammo.GetComponent<Ammo>().Speed; }
+    }
 	public float range = 100f;
 }
