@@ -5,9 +5,10 @@ using UnityEngine.UI;
 
 public class PlayerUI : MonoBehaviour {
 
-	[SerializeField]
-	private Text healthText;
+	// [SerializeField]
+	// private Text healthText;
 	private Player player;
+	private GameObject playerUIInstance;
 
 	/// <summary>
 	/// Start is called on the frame when a script is enabled just before
@@ -20,11 +21,13 @@ public class PlayerUI : MonoBehaviour {
 
 	public void SetPlayer(Player _player) {
 		player = _player;
+		playerUIInstance = player.GetPlayerUIInstance();
 	}
 
 	public void SetHealth(int value){
-		// UI.GetComponentInChildren<Text>().text = value + "%";
-		healthText.text = value + "%";
+		// GetComponent<Text>().text = value + "%";
+		// healthText.text = value + "%";
+		playerUIInstance.GetComponentInChildren<Text>().text = value + "%";
 	}
 
 	

@@ -34,10 +34,15 @@ public class Player : NetworkBehaviour {
 	void Start() {
 		playerUIInstance = Instantiate(playerUIPrefab);
 		playerUIInstance.name = playerUIPrefab.name;
-		playerUI = playerUIInstance.GetComponent<PlayerUI>();
+		playerUI = GetComponent<PlayerUI>();
 		if (playerUI == null) {
 			Debug.Log("No PlayerUI component on playerUI prefab");
 		}
+		playerUI.SetPlayer(this);
+	}
+
+	public GameObject GetPlayerUIInstance() {
+		return playerUIInstance;
 	}
 
 	public void Update() {
@@ -81,6 +86,7 @@ public class Player : NetworkBehaviour {
 		//Get PlayerSetup Object that has the PlayerUIInstance. Then run the function to change the health.
 		// _playerSetup = GetComponent<PlayerSetup>();
 		// _playerSetup.ChangeHealth(currentHealth);
+		Debug.Log(playerUI);
 		playerUI.SetHealth(currentHealth); 
 		
 		if (currentHealth <= 0) {

@@ -843,7 +843,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b02af58f44068324384e93c31b425fd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthText: {fileID: 0}
 --- !u!114 &114679947107894766
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -925,7 +924,7 @@ MonoBehaviour:
   - {fileID: 20264367565030878}
   - {fileID: 81368955399813876}
   - {fileID: 114547306081772190}
-  - {fileID: 0}
+  - {fileID: 114657414648263272}
   remoteLayerName: RemotePlayer
   dontDrawLayerName: DontDraw
   playerGraphics: {fileID: 1482844059926648}
