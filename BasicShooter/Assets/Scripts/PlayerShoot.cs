@@ -30,13 +30,14 @@ public class PlayerShoot : NetworkBehaviour {
 
 	[Client]
 	void Shoot() {
+				// TODO: Lets make this a specific weapon
         //shooting using objects
-        //the weapon should be doing the shooting
+        // the weapon should be doing the shooting
         // forward firing start location
-        Vector3 start = cam.transform.position;
-        start += cam.transform.forward.normalized * 1;
-        var bullet = (GameObject)Instantiate(weapon.Ammo, start, cam.transform.rotation);
-        bullet.GetComponent<Rigidbody>().velocity = cam.transform.forward * weapon.Speed;
+        // Vector3 start = cam.transform.position;
+        // start += cam.transform.forward.normalized * 1;
+        // var bullet = (GameObject)Instantiate(weapon.Ammo, start, cam.transform.rotation);
+        // bullet.GetComponent<Rigidbody>().velocity = cam.transform.forward * weapon.Speed;
 
         //raycast shooting[old]
 		RaycastHit _hit;
