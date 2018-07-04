@@ -30,6 +30,7 @@ public class PlayerShoot : NetworkBehaviour {
 
 	[Client]
 	void Shoot() {
+    		gameObject.GetComponentInChildren<ParticleSystem>().Play();
 				// TODO: Lets make this a specific weapon
         //shooting using objects
         // the weapon should be doing the shooting
