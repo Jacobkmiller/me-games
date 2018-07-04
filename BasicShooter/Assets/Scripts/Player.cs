@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections;
+using UnityEngine.Rendering.PostProcessing;
 
 public class Player : NetworkBehaviour {
 
@@ -22,7 +23,10 @@ public class Player : NetworkBehaviour {
 	GameObject playerUIPrefab;
 	private GameObject playerUIInstance;
 	private PlayerUI playerUI;
-
+	[SerializeField]
+	Camera playerCamera;
+	[SerializeField]
+	PostProcessLayer deathShadow;
 	public void Setup() {
 		wasEnabled = new bool[disableOnDeath.Length];
 		for (int i =0; i < wasEnabled.Length; i++){
@@ -36,6 +40,7 @@ public class Player : NetworkBehaviour {
 			playerUIInstance = Instantiate(playerUIPrefab);
 			playerUIInstance.name = playerUIPrefab.name;
 			playerUI = GetComponent<PlayerUI>();
+			deathShadow.enabled = false;
 			if (playerUI == null) {
 				Debug.Log("No PlayerUI component on playerUI prefab");
 			}
@@ -66,6 +71,11 @@ public class Player : NetworkBehaviour {
 		transform.position = _spawnPoint.position;
 		transform.rotation = _spawnPoint.rotation;
 	}
+
+	private IEnumerator ClearVignette() {
+		yield return new WaitForSeconds(1);
+		deathShadow.enabled = false;
+	}
 	public void SetDefaults() {
 		currentHealth = maxHealth;
 		if (isLocalPlayer) {
@@ -90,19 +100,18 @@ public class Player : NetworkBehaviour {
 
 		currentHealth = Mathf.Max(0, currentHealth);
 
-		// Debug.Log(transform.name + " now has " + currentHealth + " health!");
-		// PlayerSetup _playerSetup;
-		//Get PlayerSetup Object that has the PlayerUIInstance. Then run the function to change the health.
-		// _playerSetup = GetComponent<PlayerSetup>();
-		// _playerSetup.ChangeHealth(currentHealth);
 		if (isLocalPlayer) {
 			Debug.Log(playerUI);
-			playerUI.SetHealth(currentHealth); 
+			playerUI.SetHealth(currentHealth);
+			deathShadow.enabled = true;
+			StartCoroutine(ClearVignette());
 		}
 		if (currentHealth <= 0) {
 			Die();
 		}
 	}
+
+
 	public void Die() {
 		isDead = true;
 		//DISABLE COMPONENTS
