@@ -82,6 +82,7 @@ public class Player : NetworkBehaviour {
 		// _playerSetup = GetComponent<PlayerSetup>();
 		// _playerSetup.ChangeHealth(currentHealth);
 		playerUI.SetHealth(currentHealth); 
+		
 		if (currentHealth <= 0) {
 			Die();
 		}
