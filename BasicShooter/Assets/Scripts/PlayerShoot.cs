@@ -64,7 +64,7 @@ public class PlayerShoot : NetworkBehaviour {
 		// Debug.Log(_playerID + " has been shot!");
 		var _player = GetComponent<Player>();
 		// Player _player = GameManager.GetPlayer(_playerID);
-		_player.playMuzzleFlash();
+		_player.RpcPlayMuzzleFlash();
 	}
 
 }

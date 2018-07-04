@@ -42,9 +42,11 @@ public class Player : NetworkBehaviour {
 		playerUI.SetPlayer(this);
 		}
 	}
-
-	public void playMuzzleFlash() {
-    gameObject.GetComponentInChildren<ParticleSystem>().Play();
+	[ClientRpc]
+	public void RpcPlayMuzzleFlash() {
+		if (!isLocalPlayer){
+    		gameObject.GetComponentInChildren<ParticleSystem>().Play();
+		}
 	}
 
 	public GameObject GetPlayerUIInstance() {
@@ -66,8 +68,7 @@ public class Player : NetworkBehaviour {
 	}
 	public void SetDefaults() {
 		currentHealth = maxHealth;
-		PlayerSetup _playerSetup = GetComponent<PlayerSetup>();
-		_playerSetup.ChangeHealth(currentHealth);
+		playerUI.SetHealth(currentHealth);
 		isDead = false;
 		for (int i = 0; i < disableOnDeath.Length; i++){
 			 disableOnDeath[i].enabled = wasEnabled[i];
@@ -92,9 +93,10 @@ public class Player : NetworkBehaviour {
 		//Get PlayerSetup Object that has the PlayerUIInstance. Then run the function to change the health.
 		// _playerSetup = GetComponent<PlayerSetup>();
 		// _playerSetup.ChangeHealth(currentHealth);
-		Debug.Log(playerUI);
-		playerUI.SetHealth(currentHealth); 
-		
+		if (isLocalPlayer) {
+			Debug.Log(playerUI);
+			playerUI.SetHealth(currentHealth); 
+		}
 		if (currentHealth <= 0) {
 			Die();
 		}
