@@ -68,7 +68,9 @@ public class Player : NetworkBehaviour {
 	}
 	public void SetDefaults() {
 		currentHealth = maxHealth;
-		playerUI.SetHealth(currentHealth);
+		if (isLocalPlayer) {
+			playerUI.SetHealth(currentHealth);
+		}
 		isDead = false;
 		for (int i = 0; i < disableOnDeath.Length; i++){
 			 disableOnDeath[i].enabled = wasEnabled[i];
