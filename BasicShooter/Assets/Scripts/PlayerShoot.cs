@@ -11,6 +11,9 @@ public class PlayerShoot : NetworkBehaviour {
 	private Camera cam;
 
 	[SerializeField]
+	private AudioSource gunSound;
+
+	[SerializeField]
 	private LayerMask mask;
 
 	void Start()
@@ -31,6 +34,7 @@ public class PlayerShoot : NetworkBehaviour {
 	[Client]
 	void Shoot() {
     		gameObject.GetComponentInChildren<ParticleSystem>().Play();
+				gunSound.PlayOneShot(gunSound.clip, 1);
 				CmdPlayerShooting();
 				// TODO: Lets make this a specific weapon
         //shooting using objects
