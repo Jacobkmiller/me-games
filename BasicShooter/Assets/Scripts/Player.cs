@@ -32,13 +32,15 @@ public class Player : NetworkBehaviour {
 		SetDefaults();
 	}
 	void Start() {
-		playerUIInstance = Instantiate(playerUIPrefab);
-		playerUIInstance.name = playerUIPrefab.name;
-		playerUI = GetComponent<PlayerUI>();
-		if (playerUI == null) {
-			Debug.Log("No PlayerUI component on playerUI prefab");
-		}
+		if (isLocalPlayer) {
+			playerUIInstance = Instantiate(playerUIPrefab);
+			playerUIInstance.name = playerUIPrefab.name;
+			playerUI = GetComponent<PlayerUI>();
+			if (playerUI == null) {
+				Debug.Log("No PlayerUI component on playerUI prefab");
+			}
 		playerUI.SetPlayer(this);
+		}
 	}
 
 	public GameObject GetPlayerUIInstance() {
