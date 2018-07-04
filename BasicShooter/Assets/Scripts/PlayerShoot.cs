@@ -30,11 +30,20 @@ public class PlayerShoot : NetworkBehaviour {
 
 	[Client]
 	void Shoot() {
+        //shooting using objects
+        //the weapon should be doing the shooting
+        // forward firing start location
+        Vector3 start = cam.transform.position;
+        start += cam.transform.forward.normalized * 1;
+        var bullet = (GameObject)Instantiate(weapon.Ammo, start, cam.transform.rotation);
+        bullet.GetComponent<Rigidbody>().velocity = cam.transform.forward * weapon.Speed;
+
+        //raycast shooting[old]
 		RaycastHit _hit;
 		if (Physics.Raycast(cam.transform.position, cam.transform.forward, out _hit, weapon.range, mask)) {
 			// We hit something
 			if (_hit.collider.tag == PLAYER_TAG) {
-				CmdPlayerShot(_hit.collider.name, weapon.damage);
+				CmdPlayerShot(_hit.collider.name, weapon.Damage);
 			}
 		}
 	}
