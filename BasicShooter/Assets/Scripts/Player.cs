@@ -18,9 +18,10 @@ public class Player : NetworkBehaviour {
 	[SerializeField]
 	private Behaviour[] disableOnDeath;
 	private bool[] wasEnabled;
-	// [SerializeField]
-	// GameObject playerUIPrefab;
-	// private GameObject playerUIInstance;
+	[SerializeField]
+	GameObject playerUIPrefab;
+	private GameObject playerUIInstance;
+	private PlayerUI playerUI;
 
 	public void Setup() {
 		wasEnabled = new bool[disableOnDeath.Length];
@@ -29,6 +30,14 @@ public class Player : NetworkBehaviour {
 		}
 		// this.playerUI = Instantiate(playerUIPrefab);
 		SetDefaults();
+	}
+	void Start() {
+		playerUIInstance = Instantiate(playerUIPrefab);
+		playerUIInstance.name = playerUIPrefab.name;
+		playerUI = playerUIInstance.GetComponent<PlayerUI>();
+		if (playerUI == null) {
+			Debug.Log("No PlayerUI component on playerUI prefab");
+		}
 	}
 
 	public void Update() {
@@ -68,11 +77,11 @@ public class Player : NetworkBehaviour {
 		currentHealth = Mathf.Max(0, currentHealth);
 
 		// Debug.Log(transform.name + " now has " + currentHealth + " health!");
-		PlayerSetup _playerSetup;
+		// PlayerSetup _playerSetup;
 		//Get PlayerSetup Object that has the PlayerUIInstance. Then run the function to change the health.
-		_playerSetup = GetComponent<PlayerSetup>();
-		_playerSetup.ChangeHealth(currentHealth);
-
+		// _playerSetup = GetComponent<PlayerSetup>();
+		// _playerSetup.ChangeHealth(currentHealth);
+		playerUI.SetHealth(currentHealth); 
 		if (currentHealth <= 0) {
 			Die();
 		}
