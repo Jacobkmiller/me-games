@@ -779,10 +779,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee24d6297639b42c8b86487f885ee180, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon:
-    name: Magnum Dong
-    damage: 10
-    range: 100
+  weapon: {fileID: 114689013514670848, guid: f8c4a7773f92ee84eb5ef3db1dc6ac19, type: 2}
   cam: {fileID: 20264367565030878}
   mask:
     serializedVersion: 2
