@@ -1025,7 +1025,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   lookSensitivity: 3
-  jumpForce: 1.25
+  jumpForce: 2
 --- !u!114 &114763228669002078
 MonoBehaviour:
   m_ObjectHideFlags: 1
