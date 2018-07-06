@@ -13,7 +13,7 @@ public class RandomLevelGen : MonoBehaviour {
 	// public int numberOfSpawns;
 	// public int numberOfPlatforms;
 	public int sideLength;
-	public int randomGapDivisor;
+	public float randomGapDivisor;
 	public GameObject spawnPrefab;
 	public GameObject platformPrefab;
 	private float baseDistance= 110f;
