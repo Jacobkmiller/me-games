@@ -6,25 +6,15 @@ public class CleanupCollider : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        var bullet = other.GetComponent<Ammo>();
-        if (bullet != null)
+        GameObject bullet = other.gameObject;
+        if (bullet != null && !bullet.CompareTag("Player"))
         {
             print("caught a bullet");
-            Destroy(bullet.gameObject);
+            Destroy(bullet);
         }
         else
         {
             print("could not cast bullet");
         }
     }
-
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

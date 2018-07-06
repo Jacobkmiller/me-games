@@ -81,6 +81,7 @@ public class Player : NetworkBehaviour {
 	}
 	public void SetDefaults() {
 		currentHealth = maxHealth;
+		deathShadow.enabled = false;
 		if (isLocalPlayer) {
 			playerUI.SetHealth(currentHealth);
 		}
@@ -130,9 +131,12 @@ public class Player : NetworkBehaviour {
 			}
 		}
 
+		deathShadow.enabled = true;
 		Debug.Log(transform.name + " is dead!");
 		//RESPAWN
 		StartCoroutine(Respawn());
+
+
 
 	}
 }

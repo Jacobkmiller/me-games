@@ -171,6 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fba9143e0f9a64445a1670585d3585bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ammo: {fileID: 1257095659855108}
   Damage: 10
   Speed: 100
 --- !u!135 &135236687821801132

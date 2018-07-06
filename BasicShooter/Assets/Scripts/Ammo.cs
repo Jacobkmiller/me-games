@@ -1,11 +1,18 @@
 ﻿using UnityEngine;
 
 public class Ammo : MonoBehaviour
-{
-    private void OnCollisionEnter2D(Collision2D collision)
+{   
+    [SerializeField]
+    private GameObject ammo;
+    private void OnCollisionEnter(Collision collision)
     {
-        print("projectile collided with object");
-        Destroy(this);
+        // print("projectile collided with object");
+        if (collision.gameObject.CompareTag("Player")) {
+            collision.rigidbody.AddForce(collision.relativeVelocity/(-10), ForceMode.Impulse);
+        } else {
+            Destroy(ammo);
+        }
+        
     }
 
     public int Damage = 10;
