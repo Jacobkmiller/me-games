@@ -33,6 +33,11 @@ public class PlayerShoot : NetworkBehaviour {
 	}
 
 	void Update () {
+
+		if (PauseMenu.isOn) {
+			return;
+		}
+
 		if (Input.GetButtonDown("Fire1")) {
 			Shoot();
 		}
@@ -56,6 +61,7 @@ public class PlayerShoot : NetworkBehaviour {
 			start += cam.transform.forward.normalized * 1;
 			var bullet = (GameObject)Instantiate(weapon.Ammo, start, cam.transform.rotation, dynamic);
 			bullet.GetComponent<Rigidbody>().velocity = cam.transform.forward * weapon.Speed;
+			CmdShootBullet(start, cam.transform.forward*weapon.Speed, cam.transform.rotation);
 		} else {
 			gameObject.GetComponentInChildren<ParticleSystem>().Play();
 			gunSound.PlayOneShot(gunSound.clip, 1);
@@ -86,6 +92,11 @@ public class PlayerShoot : NetworkBehaviour {
 		var _player = GetComponent<Player>();
 		// Player _player = GameManager.GetPlayer(_playerID);
 		_player.RpcPlayWeaponEffects();
+	}
+	[Command]
+	void CmdShootBullet(Vector3 position, Vector3 velocity, Quaternion rotation) {
+		Player _player = GetComponent<Player>();
+		_player.RpcShootBullet(position, velocity, rotation);
 	}
 
 }

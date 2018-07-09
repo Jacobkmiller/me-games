@@ -9,14 +9,31 @@ public class PlayerUI : MonoBehaviour {
 	// private Text healthText;
 	private Player player;
 	private GameObject playerUIInstance;
+	// [SerializeField]
+	private GameObject pauseMenu;
 
 	/// <summary>
 	/// Start is called on the frame when a script is enabled just before
 	/// any of the Update methods is called the first time.
 	/// </summary>
 	void Start() {
-		// UI = Instantiate(playerUIPrefab);
-		// UI.name = playerUIPrefab.name;
+		PauseMenu.isOn = false;
+	}
+
+
+	void Update() {
+
+		if (Input.GetKeyDown(KeyCode.Tab)) {
+			TogglePauseMenu();
+		}
+	}
+
+	void TogglePauseMenu() {
+		pauseMenu = playerUIInstance.transform.Find("PauseMenu").gameObject;
+		pauseMenu.SetActive(!pauseMenu.activeSelf);
+		PauseMenu.isOn = pauseMenu.activeSelf;
+		// player.TogglePauseMenu();
+		// Debug.Log(playerUIInstance.transform.Find("PauseMenu").gameObject);
 	}
 
 	public void SetPlayer(Player _player) {

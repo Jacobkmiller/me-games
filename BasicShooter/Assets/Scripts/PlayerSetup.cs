@@ -40,9 +40,8 @@ public class PlayerSetup : NetworkBehaviour {
 			// if (playerUI == null) {
 			// 	Debug.Log("No PlayerUI component on playerUI prefab");
 			// }
+			GetComponent<Player>().PlayerSetup();
 		}
-		GetComponent<Player>().Setup();
-
 	}
 
 	void SetLayerRecursively(GameObject obj, int newLayer){

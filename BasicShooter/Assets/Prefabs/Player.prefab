@@ -1000,7 +1000,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 20264367565030878}
-  cameraLimit: 80
+  cameraLimit: 90
 --- !u!114 &114657414648263272
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1012,6 +1012,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b02af58f44068324384e93c31b425fd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pauseMenu: {fileID: 1809186366636762, guid: b63b949ccd827934f8897cf3f634ddb1, type: 2}
 --- !u!114 &114679947107894766
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -27,15 +27,12 @@ public class Player : NetworkBehaviour {
 	Camera playerCamera;
 	[SerializeField]
 	PostProcessLayer deathShadow;
-	public void Setup() {
-		wasEnabled = new bool[disableOnDeath.Length];
-		for (int i =0; i < wasEnabled.Length; i++){
-			wasEnabled[i] = disableOnDeath[i].enabled;
-		}
-		// this.playerUI = Instantiate(playerUIPrefab);
-		SetDefaults();
+
+	private bool firstSetup = true;
+	public void PlayerSetup() {
+		CmdBroadcastNewPlayerSetup();
 	}
-	void Start() {
+	public void Start() {
 		if (isLocalPlayer) {
 			playerUIInstance = Instantiate(playerUIPrefab);
 			playerUIInstance.name = playerUIPrefab.name;
@@ -47,13 +44,30 @@ public class Player : NetworkBehaviour {
 		playerUI.SetPlayer(this);
 		}
 	}
+	[Command]
+	private void CmdBroadcastNewPlayerSetup() {
+		RpcSetupPlayerOnAllClients();
+	}
+
+	[ClientRpc]
+	private void RpcSetupPlayerOnAllClients() {
+		if (firstSetup) {
+			wasEnabled = new bool[disableOnDeath.Length];
+			for (int i =0; i < wasEnabled.Length; i++){
+				wasEnabled[i] = disableOnDeath[i].enabled;
+			}
+			firstSetup = false;
+		}
+		SetDefaults();
+	}
 
 	[ClientRpc]
 	public void RpcPlayWeaponEffects() {
 		if (!isLocalPlayer){
     		gameObject.GetComponentInChildren<ParticleSystem>().Play();
-			  AudioSource _audiosource = gameObject.GetComponentInChildren<AudioSource>();
-				_audiosource.PlayOneShot(_audiosource.clip, 1);
+			AudioSource _audiosource = gameObject.GetComponentInChildren<AudioSource>();
+			_audiosource.PlayOneShot(_audiosource.clip, 1);
+
 		}
 	}
 
@@ -69,7 +83,7 @@ public class Player : NetworkBehaviour {
 	}
 	private IEnumerator Respawn() {
 		yield return new WaitForSeconds(GameManager.instance.matchSettings.respawnTime);
-		SetDefaults();
+		PlayerSetup();
 		Transform _spawnPoint = NetworkManager.singleton.GetStartPosition();
 		transform.position = _spawnPoint.position;
 		transform.rotation = _spawnPoint.rotation;
@@ -105,13 +119,22 @@ public class Player : NetworkBehaviour {
 		currentHealth = Mathf.Max(0, currentHealth);
 
 		if (isLocalPlayer) {
-			Debug.Log(playerUI);
 			playerUI.SetHealth(currentHealth);
 			deathShadow.enabled = true;
 			StartCoroutine(ClearVignette());
 		}
 		if (currentHealth <= 0) {
 			Die();
+		}
+	}
+
+	[ClientRpc]
+	public void RpcShootBullet(Vector3 position, Vector3 velocity, Quaternion rotation) {
+		if (!isLocalPlayer){ 
+			PlayerShoot _shooter = GetComponent<PlayerShoot>();
+			var bullet = (GameObject)Instantiate(_shooter.weapon.Ammo, position, rotation);
+			bullet.GetComponent<Rigidbody>().velocity = velocity;
+			
 		}
 	}
 
@@ -136,7 +159,9 @@ public class Player : NetworkBehaviour {
 		//RESPAWN
 		StartCoroutine(Respawn());
 
+	}
 
-
+	public void TogglePauseMenu(){
+		Debug.Log(playerUIInstance.transform.GetChild(2));
 	}
 }
