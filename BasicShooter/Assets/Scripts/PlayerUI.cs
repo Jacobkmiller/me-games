@@ -2,20 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Rendering.PostProcessing;
 
 public class PlayerUI : MonoBehaviour {
 
-	// [SerializeField]
-	// private Text healthText;
+	[SerializeField]
+	private Text healthText;
 	private Player player;
-	private GameObject playerUIInstance;
 	// [SerializeField]
+	// PostProcessLayer deathShadow;
+	private GameObject playerUIInstance;
+	[SerializeField]
 	private GameObject pauseMenu;
 
-	/// <summary>
-	/// Start is called on the frame when a script is enabled just before
-	/// any of the Update methods is called the first time.
-	/// </summary>
 	void Start() {
 		PauseMenu.isOn = false;
 	}
@@ -28,8 +27,8 @@ public class PlayerUI : MonoBehaviour {
 		}
 	}
 
-	void TogglePauseMenu() {
-		pauseMenu = playerUIInstance.transform.Find("PauseMenu").gameObject;
+	public void TogglePauseMenu() {
+		// pauseMenu = playerUIInstance.transform.Find("PauseMenu").gameObject;
 		pauseMenu.SetActive(!pauseMenu.activeSelf);
 		PauseMenu.isOn = pauseMenu.activeSelf;
 		// player.TogglePauseMenu();
@@ -43,8 +42,8 @@ public class PlayerUI : MonoBehaviour {
 
 	public void SetHealth(int value){
 		// GetComponent<Text>().text = value + "%";
-		// healthText.text = value + "%";
-		playerUIInstance.GetComponentInChildren<Text>().text = value + "%";
+		healthText.text = value + "%";
+		// playerUIInstance.GetComponentInChildren<Text>().text = value + "%";
 	}
 
 	

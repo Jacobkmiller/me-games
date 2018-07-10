@@ -17,8 +17,8 @@ public class PlayerController : MonoBehaviour {
 	void Start()
 	{
 		motor = GetComponent<PlayerMotor>();
-    Cursor.visible = false;
-    Cursor.lockState = CursorLockMode.Locked;
+		Cursor.visible = false;
+		// Cursor.lockState = CursorLockMode.Locked;
 	}
 
 	void OnCollisionStay()
@@ -29,7 +29,19 @@ public class PlayerController : MonoBehaviour {
 	void Update()
 	{	
 		if (PauseMenu.isOn) {
+			if (Cursor.lockState != CursorLockMode.None) {
+				Cursor.lockState = CursorLockMode.None;
+			}
+
+			motor.Move(Vector3.zero);
+			motor.Rotate(Vector3.zero);
+			motor.RotateCamera(0f);
 			return;
+		}
+
+
+		if (Cursor.lockState != CursorLockMode.Locked) {
+			Cursor.lockState = CursorLockMode.Locked;
 		}
 		//Calculate movement velocity as a 3D vector
 		float _xMov = Input.GetAxisRaw("Horizontal");
@@ -65,6 +77,7 @@ public class PlayerController : MonoBehaviour {
 		
 		//Apply camera rotation
 		motor.RotateCamera(_cameraRotation);
+		// motor.RotateArm(_cameraRotation);
 
 	}
 }

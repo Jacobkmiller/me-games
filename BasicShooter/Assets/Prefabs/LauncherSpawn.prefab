@@ -176,6 +176,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4200200014864622}
+  - component: {fileID: 114994396078612994}
   m_Layer: 0
   m_Name: LauncherSpawn
   m_TagString: Untagged
@@ -723,3 +724,35 @@ MonoBehaviour:
   m_Script: {fileID: -1050975500, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114994396078612994
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1637523712790032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 96
+    i1: 74
+    i2: 7
+    i3: 49
+    i4: 76
+    i5: 213
+    i6: 137
+    i7: 100
+    i8: 88
+    i9: 201
+    i10: 225
+    i11: 33
+    i12: 124
+    i13: 148
+    i14: 195
+    i15: 202
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0

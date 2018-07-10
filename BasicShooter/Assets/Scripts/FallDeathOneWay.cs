@@ -14,7 +14,7 @@ public class FallDeathOneWay : MonoBehaviour {
 		if (other.tag == "Player") {
 			Player player = other.GetComponentInParent<Player>();
 			if (players.Contains(player.name)) {
-				player.GetComponent<PlayerUI>().SetHealth(0);
+				player.RpcTakeDamage(100);
 				player.Die();
 				players.Remove(player.name);
 			} else {

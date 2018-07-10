@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class RandomLevelGen : MonoBehaviour {
+public class RandomLevelGen : NetworkBehaviour {
 
 	// Use this for initialization
 	// public int platformGapMax;
@@ -17,24 +18,19 @@ public class RandomLevelGen : MonoBehaviour {
 	public GameObject spawnPrefab;
 	public GameObject platformPrefab;
 	private float baseDistance= 110f;
+	[SyncVar]
+	private int seed;
 	void Start () {
+		if (Network.isServer){
+			seed = Random.Range(1, int.MaxValue);
+			Debug.Log(seed);
+		}
+		Random.InitState(seed);
 		GenerateSpawnLocations();
 		GeneratePlatforms(sideLength);
 	}
 
 	private void GenerateSpawnLocations() {
-		// for (int i = 0; i < numberOfSpawns; i++) {
-			// GameObject spawn = Instantiate(spawnPrefab);
-			// Quaternion rotQ = Random.rotation;
-			// Vector3 rot = new Vector3(rotQ.eulerAngles.x, 0f, rotQ.eulerAngles.z);
-			// Vector3 rot = new Vector3(0f, rotQ.eulerAngles.y, 0f);
-			// float distance = Random.Range(spawnGapMin, spawnGapMax);
-			// spawn.transform.position = rot*distance;
-			// Vector3 p = spawn.transform.position;
-			// p.y = -110f;
-			// spawn.transform.position = p;
-			
-		// }
 		float posx = sideLength/2*averageGap;
 		float posy = baseDistance;
 		float posz = sideLength/2*averageGap;
@@ -42,6 +38,10 @@ public class RandomLevelGen : MonoBehaviour {
 		GameObject spawn2 = Instantiate(spawnPrefab);
 		GameObject spawn3 = Instantiate(spawnPrefab);
 		GameObject spawn4 = Instantiate(spawnPrefab);
+		NetworkServer.Spawn(spawn1);
+		NetworkServer.Spawn(spawn2);
+		NetworkServer.Spawn(spawn3);
+		NetworkServer.Spawn(spawn4);
 		spawn1.transform.position = new Vector3(posx, posy, posz);
 		spawn2.transform.position = new Vector3(-posx, posy, posz);
 		spawn3.transform.position = new Vector3(posx, posy, -posz);
@@ -70,23 +70,12 @@ public class RandomLevelGen : MonoBehaviour {
 			for (int j = 0; j < sideLength; j++) {
 				for (int k = 0; k < sideLength; k++){
 					GameObject platform = Instantiate(platformPrefab);
+					NetworkServer.Spawn(platform);
 					platform.transform.position = new Vector3(x+i*averageGap, y+k*averageGap, z+j*averageGap);
 					platform.transform.Rotate(0f, Random.Range(0,360), 0f);
 					platforms.Add(platform);
 				}
 			}
-		// 	GameObject platform = Instantiate(platformPrefab);
-		// 	float rotx = Random.Range(0,90);
-		// 	float roty = Random.Range(0,360);
-		// 	// Vector3 rot = new Vector3(rotQ.eulerAngles.x, 0f, rotQ.eulerAngles.z);
-		// 	Quaternion rot = Quaternion.Euler(0f, rotx, roty);
-		// 	// Vector3 distance = Vector3.forward*Random.Range(platformGapMin, platformGapMax);
-		// 	platform.transform.position = rot*distance;
-		// 	Quaternion rotQ = Random.rotation;
-			// Quaternion rotyPlatform = Quaternion.Euler(0f, 0f, rotQ.eulerAngles.y);
-			// platform.transform.rotation = rotyPlatform;
-			
-
 		}
 		foreach (GameObject pf in platforms) {
 			Vector3 currentPosition = pf.transform.position;

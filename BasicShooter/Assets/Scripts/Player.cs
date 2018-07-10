@@ -19,8 +19,8 @@ public class Player : NetworkBehaviour {
 	[SerializeField]
 	private Behaviour[] disableOnDeath;
 	private bool[] wasEnabled;
-	[SerializeField]
-	GameObject playerUIPrefab;
+	// [SerializeField]
+	// GameObject playerUIPrefab;
 	private GameObject playerUIInstance;
 	private PlayerUI playerUI;
 	[SerializeField]
@@ -33,15 +33,10 @@ public class Player : NetworkBehaviour {
 		CmdBroadcastNewPlayerSetup();
 	}
 	public void Start() {
+		Debug.Log(isLocalPlayer);
+		Debug.Log("Was I local player?");
 		if (isLocalPlayer) {
-			playerUIInstance = Instantiate(playerUIPrefab);
-			playerUIInstance.name = playerUIPrefab.name;
-			playerUI = GetComponent<PlayerUI>();
-			deathShadow.enabled = false;
-			if (playerUI == null) {
-				Debug.Log("No PlayerUI component on playerUI prefab");
-			}
-		playerUI.SetPlayer(this);
+			playerUI = GetComponent<PlayerSetup>().getUI();
 		}
 	}
 	[Command]
@@ -89,10 +84,6 @@ public class Player : NetworkBehaviour {
 		transform.rotation = _spawnPoint.rotation;
 	}
 
-	private IEnumerator ClearVignette() {
-		yield return new WaitForSeconds(1);
-		deathShadow.enabled = false;
-	}
 	public void SetDefaults() {
 		currentHealth = maxHealth;
 		deathShadow.enabled = false;
@@ -121,7 +112,7 @@ public class Player : NetworkBehaviour {
 		if (isLocalPlayer) {
 			playerUI.SetHealth(currentHealth);
 			deathShadow.enabled = true;
-			StartCoroutine(ClearVignette());
+			StartCoroutine(ClearVignette(1));
 		}
 		if (currentHealth <= 0) {
 			Die();
@@ -161,7 +152,13 @@ public class Player : NetworkBehaviour {
 
 	}
 
+	private IEnumerator ClearVignette(int seconds) {
+		yield return new WaitForSeconds(seconds);
+		deathShadow.enabled = false;
+	}
+
 	public void TogglePauseMenu(){
 		Debug.Log(playerUIInstance.transform.GetChild(2));
 	}
+
 }

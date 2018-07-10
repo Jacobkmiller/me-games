@@ -9,7 +9,8 @@ public class PlayerMotor : MonoBehaviour {
 	private Camera cam;
 	[SerializeField]
 	private float cameraLimit = 85;
-
+	[SerializeField]
+	private GameObject arm;
 	private Vector3 velocity = Vector3.zero;
 	private Vector3 rotation = Vector3.zero;
 	private float cameraRotationX = 0f;
@@ -17,10 +18,12 @@ public class PlayerMotor : MonoBehaviour {
 	private Vector3 jumpVector = Vector3.zero;
 
 	private Rigidbody rb;
+	private bool pauseArm;
 
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody>();
+		pauseArm = false;
 	}
 
 	// Gets a movement vector
@@ -48,6 +51,16 @@ public class PlayerMotor : MonoBehaviour {
 		rb.AddForce(jumpVector * _jumpForce, ForceMode.Impulse);
 	}
 
+	void Update() {
+		if (Input.GetKeyDown("h")) {
+			pauseArm = !pauseArm;
+		}
+
+		if (Input.GetKeyDown("r")) {
+			Debug.Log(arm.transform.localEulerAngles);
+		}
+	}
+
 	// Update is called once per frame
 	void FixedUpdate ()
 	{
@@ -68,13 +81,17 @@ public class PlayerMotor : MonoBehaviour {
 	void PerformRotation ()
 	{
 		rb.MoveRotation(rb.rotation * Quaternion.Euler (rotation));
-		if (cam != null)
+		if (cam != null && !pauseArm)
 		{
 			// cam.transform.Rotate(-cameraRotation);
 			currentCameraRotationX -= cameraRotationX;
 			currentCameraRotationX = Mathf.Clamp(currentCameraRotationX, -cameraLimit, cameraLimit);
 
 			cam.transform.localEulerAngles = new Vector3(currentCameraRotationX, 0f, 0f);
+		}
+		if (arm != null && !pauseArm) {
+			// arm.transform.Rotate(currentCameraRotationX, 0, 0);
+			arm.transform.localEulerAngles = new Vector3(351.3f, 79.2f, -currentCameraRotationX+55);
 		}
 	}
 	
