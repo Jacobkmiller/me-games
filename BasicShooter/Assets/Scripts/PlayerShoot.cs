@@ -18,7 +18,7 @@ public class PlayerShoot : NetworkBehaviour {
 
 	private Transform dynamic;
 
-	private bool secondaryFireMode = false;
+	private bool secondaryFireMode = true;
 
 	void Start()
 	{
@@ -47,7 +47,10 @@ public class PlayerShoot : NetworkBehaviour {
 
 	[Client]
 	void Shoot() {
-		if (secondaryFireMode) {
+        gameObject.GetComponentInChildren<ParticleSystem>().Play();
+        gunSound.PlayOneShot(gunSound.clip, 1);
+        CmdPlayWeaponEffects();
+        if (secondaryFireMode) {
 			// TODO: Lets make this a specific weapon
 			//shooting using objects
 			// the weapon should be doing the shooting
@@ -57,10 +60,6 @@ public class PlayerShoot : NetworkBehaviour {
 			var bullet = (GameObject)Instantiate(weapon.Ammo, start, cam.transform.rotation, dynamic);
 			bullet.GetComponent<Rigidbody>().velocity = cam.transform.forward * weapon.Speed;
 		} else {
-			gameObject.GetComponentInChildren<ParticleSystem>().Play();
-			gunSound.PlayOneShot(gunSound.clip, 1);
-			CmdPlayWeaponEffects();
-
 			//raycast shooting[old]
 			RaycastHit _hit;
 			if (Physics.Raycast(cam.transform.position, cam.transform.forward, out _hit, weapon.range, mask)) {
