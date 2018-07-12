@@ -13,11 +13,13 @@ public class PlayerController : MonoBehaviour {
 	private float jumpForce = 1.25f;
 	private PlayerMotor motor;
 	private bool isGrounded;
+	
 
 	void Start()
 	{
 		motor = GetComponent<PlayerMotor>();
 		Cursor.visible = false;
+		
 		// Cursor.lockState = CursorLockMode.Locked;
 	}
 
