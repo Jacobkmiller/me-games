@@ -15,7 +15,7 @@ public class FallDeathOneWay : MonoBehaviour {
 			Player player = other.GetComponentInParent<Player>();
 			if (players.Contains(player.name)) {
 				player.RpcTakeDamage(100);
-				player.Die();
+				// player.Die();
 				players.Remove(player.name);
 			} else {
 				players.Add(player.name);

@@ -38,10 +38,10 @@ public class RandomLevelGen : NetworkBehaviour {
 		GameObject spawn2 = Instantiate(spawnPrefab);
 		GameObject spawn3 = Instantiate(spawnPrefab);
 		GameObject spawn4 = Instantiate(spawnPrefab);
-		NetworkServer.Spawn(spawn1);
-		NetworkServer.Spawn(spawn2);
-		NetworkServer.Spawn(spawn3);
-		NetworkServer.Spawn(spawn4);
+		// NetworkServer.Spawn(spawn1);
+		// NetworkServer.Spawn(spawn2);
+		// NetworkServer.Spawn(spawn3);
+		// NetworkServer.Spawn(spawn4);
 		spawn1.transform.position = new Vector3(posx, posy, posz);
 		spawn2.transform.position = new Vector3(-posx, posy, posz);
 		spawn3.transform.position = new Vector3(posx, posy, -posz);
@@ -70,7 +70,7 @@ public class RandomLevelGen : NetworkBehaviour {
 			for (int j = 0; j < sideLength; j++) {
 				for (int k = 0; k < sideLength; k++){
 					GameObject platform = Instantiate(platformPrefab);
-					NetworkServer.Spawn(platform);
+					// NetworkServer.Spawn(platform);
 					platform.transform.position = new Vector3(x+i*averageGap, y+k*averageGap, z+j*averageGap);
 					platform.transform.Rotate(0f, Random.Range(0,360), 0f);
 					platforms.Add(platform);

@@ -1001,8 +1001,9 @@ MonoBehaviour:
   cam: {fileID: 20264367565030878}
   cameraLimit: 90
   cameraRotationOffset: 0
-  arm: {fileID: 0}
-  spineCoords: {fileID: 0}
+  lowerSpine: {fileID: 0}
+  head: {fileID: 0}
+  rightForearm: {fileID: 0}
 --- !u!114 &114679947107894766
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1017,6 +1018,8 @@ MonoBehaviour:
   speed: 8
   lookSensitivity: 3
   jumpForce: 2
+  cam: {fileID: 0}
+  airialVelocityMuliplier: 0
 --- !u!114 &114763228669002078
 MonoBehaviour:
   m_ObjectHideFlags: 1

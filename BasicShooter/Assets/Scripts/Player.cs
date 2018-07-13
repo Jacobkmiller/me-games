@@ -99,6 +99,8 @@ public class Player : NetworkBehaviour {
 		if (_col != null){
 			_col.enabled = true;
 		}
+		Rigidbody rb = GetComponent<Rigidbody>();
+		rb.velocity = new Vector3(0f,0f,0f);
 	}
 	[ClientRpc]
 	public void RpcTakeDamage(int _amount) {
