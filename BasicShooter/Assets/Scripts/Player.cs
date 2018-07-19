@@ -167,24 +167,6 @@ public class Player : NetworkBehaviour {
 		}
 	}
 
-	[Command]
-	private void CmdSendInitialConditions(Vector3 velocity) {
-		RpcUpdateInitialConditions(velocity);
-	}
-
-	[ClientRpc]
-	private void RpcUpdateInitialConditions(Vector3 velocity) {
-		Rigidbody rb = GetComponent<Rigidbody>();
-
-		// rb.velocity = Vector3.zero;
-		rb.isKinematic = true;
-		// yield return new WaitForEndOfFrame();
-		rb.isKinematic = false;
-		Debug.Log(scene.name);
-		if (scene.name == "RandomLevel") {
-			rb.AddForce(launchVelocity, ForceMode.Impulse);
-		}
-	}
 
 	private void setInitialConditions() {
 		Rigidbody rb = GetComponent<Rigidbody>();
