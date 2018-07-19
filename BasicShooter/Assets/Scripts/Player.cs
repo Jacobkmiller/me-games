@@ -52,6 +52,7 @@ public class Player : NetworkBehaviour {
 				wasEnabled[i] = disableOnDeath[i].enabled;
 			}
 			firstSetup = false;
+			setInitialConditions();
 		}
 		SetDefaults();
 	}
@@ -76,6 +77,7 @@ public class Player : NetworkBehaviour {
 		yield return new WaitForSeconds(GameManager.instance.matchSettings.respawnTime);
 		PlayerSetup();
 		Transform _spawnPoint = NetworkManager.singleton.GetStartPosition();
+		setInitialConditions();
 		transform.position = _spawnPoint.position;
 		transform.rotation = _spawnPoint.rotation;
 	}
@@ -83,6 +85,8 @@ public class Player : NetworkBehaviour {
 	public void SetDefaults() {
 		currentHealth = maxHealth;
 		deathShadow.enabled = false;
+		// CmdSendInitialConditions(Vector3.zero);
+		// setInitialConditions();
 		if (isLocalPlayer) {
 			playerUI.SetHealth(currentHealth);
 		}
@@ -95,12 +99,8 @@ public class Player : NetworkBehaviour {
 		if (_col != null){
 			_col.enabled = true;
 		}
-		Rigidbody rb = GetComponent<Rigidbody>();
-		if (scene.name == "RandomLevel") {
-			rb.velocity = launchVelocity;
-		} else {
-			rb.velocity = new Vector3(0f,0f,0f);
-		}
+		
+		
 	}
 	[ClientRpc]
 	public void RpcTakeDamage(int _amount) {
@@ -160,9 +160,43 @@ public class Player : NetworkBehaviour {
 	}
 
 	public void Kill(){
-		isDead = true;
-		playerUI.SetHealth(0);
-		Die();
+		if (isLocalPlayer){
+			isDead = true;
+			playerUI.SetHealth(0);
+			Die();
+		}
+	}
+
+	[Command]
+	private void CmdSendInitialConditions(Vector3 velocity) {
+		RpcUpdateInitialConditions(velocity);
+	}
+
+	[ClientRpc]
+	private void RpcUpdateInitialConditions(Vector3 velocity) {
+		Rigidbody rb = GetComponent<Rigidbody>();
+
+		// rb.velocity = Vector3.zero;
+		rb.isKinematic = true;
+		// yield return new WaitForEndOfFrame();
+		rb.isKinematic = false;
+		Debug.Log(scene.name);
+		if (scene.name == "RandomLevel") {
+			rb.AddForce(launchVelocity, ForceMode.Impulse);
+		}
+	}
+
+	private void setInitialConditions() {
+		Rigidbody rb = GetComponent<Rigidbody>();
+
+		rb.velocity = Vector3.zero;
+		// rb.isKinematic = true;
+		// yield return new WaitForEndOfFrame();
+		// rb.isKinematic = false;
+		Debug.Log(scene.name);
+		if (scene.name == "RandomLevel") {
+			rb.AddForce(launchVelocity, ForceMode.Impulse);
+		}
 	}
 
 }
