@@ -1000,10 +1000,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 20264367565030878}
   cameraLimit: 90
-  cameraRotationOffset: 0
   lowerSpine: {fileID: 0}
   head: {fileID: 0}
-  rightForearm: {fileID: 0}
 --- !u!114 &114679947107894766
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1035,6 +1033,7 @@ MonoBehaviour:
   disableOnDeath:
   - {fileID: 114679947107894766}
   - {fileID: 114547306081772190}
+  launchVelocity: {x: 0, y: 0, z: 0}
   playerCamera: {fileID: 20264367565030878}
   deathShadow: {fileID: 114255941827554262}
 --- !u!114 &114776073570945460

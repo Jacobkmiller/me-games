@@ -141,12 +141,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a37ac0a7c47e334cbb769d6253b8430, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  averageGap: 25
-  sideLength: 5
-  randomGapDivisor: 0.8
-  spawnPrefab: {fileID: 1637523712790032, guid: 604a07314cd5896458c9e1217c94c3ca,
+  averageGap: 15
+  sideLength: 3
+  randomGapDivisor: 0.5
+  spawnPrefab: {fileID: 1525148041854260, guid: 3b271368ffa5a9c4bab818c110179bb3,
     type: 2}
   platformPrefab: {fileID: 1684750834096166, guid: b7f584d2ecf5ba848b225e2ab2173c02,
+    type: 2}
+  teleportationPrefab: {fileID: 1742611494191696, guid: e52e9e9642068554fbcc46e1de0e0530,
     type: 2}
 --- !u!4 &306982353
 Transform:

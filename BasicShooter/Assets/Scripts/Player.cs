@@ -2,6 +2,7 @@
 using UnityEngine.Networking;
 using System.Collections;
 using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.SceneManagement;
 
 public class Player : NetworkBehaviour {
 
@@ -19,25 +20,25 @@ public class Player : NetworkBehaviour {
 	[SerializeField]
 	private Behaviour[] disableOnDeath;
 	private bool[] wasEnabled;
-	// [SerializeField]
-	// GameObject playerUIPrefab;
+	[SerializeField]
+	private Vector3 launchVelocity;
 	private GameObject playerUIInstance;
 	private PlayerUI playerUI;
 	[SerializeField]
 	Camera playerCamera;
 	[SerializeField]
 	PostProcessLayer deathShadow;
+	private Scene scene;
 
 	private bool firstSetup = true;
 	public void PlayerSetup() {
 		CmdBroadcastNewPlayerSetup();
 	}
 	public void Start() {
-		Debug.Log(isLocalPlayer);
-		Debug.Log("Was I local player?");
 		if (isLocalPlayer) {
 			playerUI = GetComponent<PlayerSetup>().getUI();
 		}
+		scene = SceneManager.GetActiveScene();
 	}
 	[Command]
 	private void CmdBroadcastNewPlayerSetup() {
@@ -100,7 +101,11 @@ public class Player : NetworkBehaviour {
 			_col.enabled = true;
 		}
 		Rigidbody rb = GetComponent<Rigidbody>();
-		rb.velocity = new Vector3(0f,0f,0f);
+		if (scene.name == "RandomLevel") {
+			rb.velocity = launchVelocity;
+		} else {
+			rb.velocity = new Vector3(0f,0f,0f);
+		}
 	}
 	[ClientRpc]
 	public void RpcTakeDamage(int _amount) {
@@ -161,6 +166,12 @@ public class Player : NetworkBehaviour {
 
 	public void TogglePauseMenu(){
 		Debug.Log(playerUIInstance.transform.GetChild(2));
+	}
+
+	public void Kill(){
+		isDead = true;
+		playerUI.SetHealth(0);
+		Die();
 	}
 
 }
