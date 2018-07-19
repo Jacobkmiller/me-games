@@ -33,6 +33,11 @@ public class PlayerShoot : NetworkBehaviour {
 	}
 
 	void Update () {
+
+		if (PauseMenu.isOn) {
+			return;
+		}
+
 		if (Input.GetButtonDown("Fire1")) {
 			Shoot();
 		}
@@ -59,11 +64,15 @@ public class PlayerShoot : NetworkBehaviour {
 			start += cam.transform.forward.normalized * 1;
 			var bullet = (GameObject)Instantiate(weapon.Ammo, start, cam.transform.rotation, dynamic);
 			bullet.GetComponent<Rigidbody>().velocity = cam.transform.forward * weapon.Speed;
+			CmdShootBullet(start, cam.transform.forward*weapon.Speed, cam.transform.rotation);
 		} else {
 			//raycast shooting[old]
 			RaycastHit _hit;
+			Debug.DrawRay(cam.transform.position, cam.transform.forward*5, Color.red, 1);
+			Physics.Raycast(cam.transform.position, cam.transform.forward, out _hit, weapon.range, mask);
 			if (Physics.Raycast(cam.transform.position, cam.transform.forward, out _hit, weapon.range, mask)) {
 				// We hit something
+				Debug.Log(_hit.collider.tag);
 				if (_hit.collider.tag == PLAYER_TAG) {
 					CmdPlayerShot(_hit.collider.name, weapon.Damage);
 				}
@@ -85,6 +94,11 @@ public class PlayerShoot : NetworkBehaviour {
 		var _player = GetComponent<Player>();
 		// Player _player = GameManager.GetPlayer(_playerID);
 		_player.RpcPlayWeaponEffects();
+	}
+	[Command]
+	void CmdShootBullet(Vector3 position, Vector3 velocity, Quaternion rotation) {
+		Player _player = GetComponent<Player>();
+		_player.RpcShootBullet(position, velocity, rotation);
 	}
 
 }

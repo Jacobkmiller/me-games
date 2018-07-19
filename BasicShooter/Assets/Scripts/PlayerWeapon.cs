@@ -4,7 +4,7 @@
 public class PlayerWeapon : MonoBehaviour {
 
     public GameObject Ammo;
-	public string name = "Magnum Dong";
+	public string _name = "Magnum Dong";
 
     public int Damage
     {

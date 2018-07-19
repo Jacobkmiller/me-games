@@ -44,7 +44,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -89,7 +89,8 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000002, guid: 923f37e28d7587644beeed5d75aaaf55,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -140,12 +141,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a37ac0a7c47e334cbb769d6253b8430, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  averageGap: 25
-  sideLength: 5
+  averageGap: 15
+  sideLength: 3
   randomGapDivisor: 0.5
-  spawnPrefab: {fileID: 1637523712790032, guid: 604a07314cd5896458c9e1217c94c3ca,
+  spawnPrefab: {fileID: 1525148041854260, guid: 3b271368ffa5a9c4bab818c110179bb3,
     type: 2}
   platformPrefab: {fileID: 1684750834096166, guid: b7f584d2ecf5ba848b225e2ab2173c02,
+    type: 2}
+  teleportationPrefab: {fileID: 1742611494191696, guid: e52e9e9642068554fbcc46e1de0e0530,
     type: 2}
 --- !u!4 &306982353
 Transform:
@@ -218,7 +221,7 @@ Light:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_Lightmapping: 4
+  m_Lightmapping: 1
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
@@ -252,7 +255,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 500, y: 1, z: 500}
+  m_Size: {x: 1000, y: 1, z: 1000}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &393533007
 MonoBehaviour:
@@ -272,7 +275,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 393533005}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.841, z: 0}
+  m_LocalPosition: {x: 0, y: 10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -539,12 +542,12 @@ MonoBehaviour:
   m_ScriptCRCCheck: 1
   m_MaxDelay: 0.01
   m_LogLevel: 2
-  m_PlayerPrefab: {fileID: 1529662365218638, guid: 07738027ce387ea4c8490f157b5cda10,
+  m_PlayerPrefab: {fileID: 1792970163872398, guid: eee8062b537a2fa4ebce1088599a0a87,
     type: 2}
   m_AutoCreatePlayer: 1
   m_PlayerSpawnMethod: 1
-  m_OfflineScene: 
-  m_OnlineScene: 
+  m_OfflineScene: Lobby
+  m_OnlineScene: RandomLevel
   m_SpawnPrefabs:
   - {fileID: 0}
   m_CustomConfig: 0

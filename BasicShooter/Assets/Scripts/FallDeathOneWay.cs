@@ -13,9 +13,9 @@ public class FallDeathOneWay : MonoBehaviour {
 		Debug.Log("TRIGGERED!");
 		if (other.tag == "Player") {
 			Player player = other.GetComponentInParent<Player>();
+			// PlayerShoot shootObj = other.GetComponentInParent<PlayerShoot>();
 			if (players.Contains(player.name)) {
-				player.GetComponent<PlayerUI>().SetHealth(0);
-				player.Die();
+				player.Kill();
 				players.Remove(player.name);
 			} else {
 				players.Add(player.name);

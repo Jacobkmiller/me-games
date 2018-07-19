@@ -11,23 +11,45 @@ public class PlayerController : MonoBehaviour {
 	private float lookSensitivity = 3f;
 	[SerializeField]
 	private float jumpForce = 1.25f;
+	[SerializeField]
+	private Camera cam;
+	[SerializeField]
+	private float airialVelocityMuliplier;
 	private PlayerMotor motor;
 	private bool isGrounded;
+	
 
 	void Start()
 	{
 		motor = GetComponent<PlayerMotor>();
-    Cursor.visible = false;
-    Cursor.lockState = CursorLockMode.Locked;
+		Cursor.visible = false;
+		
+		// Cursor.lockState = CursorLockMode.Locked;
 	}
 
 	void OnCollisionStay()
 	{	
 		isGrounded = true;
+		// motor.SetGroundedTrigger(isGrounded);
 	}
 
 	void Update()
-	{
+	{	
+		if (PauseMenu.isOn) {
+			if (Cursor.lockState != CursorLockMode.None) {
+				Cursor.lockState = CursorLockMode.None;
+			}
+
+			motor.Move(Vector3.zero);
+			motor.Rotate(Vector3.zero);
+			motor.RotateCamera(0f);
+			return;
+		}
+
+
+		if (Cursor.lockState != CursorLockMode.Locked) {
+			Cursor.lockState = CursorLockMode.Locked;
+		}
 		//Calculate movement velocity as a 3D vector
 		float _xMov = Input.GetAxisRaw("Horizontal");
 		float _zMov = Input.GetAxisRaw("Vertical");
@@ -37,14 +59,21 @@ public class PlayerController : MonoBehaviour {
 		if((_jump != 0) && isGrounded){
 				motor.Jump(jumpForce);
 				isGrounded = false;
+				// motor.SetGroundedTrigger(isGrounded);
 		}
 
-		Vector3 _movHorizontal = transform.right * _xMov;
-		Vector3 _movVertical = transform.forward * _zMov;
+		Vector3 _movHorizontal = (cam.transform.right - new Vector3(0f, cam.transform.right.y, 0f)).normalized * _xMov;
+		Vector3 _movVertical = (cam.transform.forward - new Vector3(0f, cam.transform.forward.y, 0f)).normalized * _zMov;
 
-		//Final Movement velcoty
+		//Final Movement velocity
 		Vector3 _velocity = (_movHorizontal + _movVertical).normalized * speed;
-		motor.Move(_velocity);
+		if (isGrounded){
+			motor.Move(_velocity);
+		} else {
+			motor.Move(_velocity*airialVelocityMuliplier);
+		}
+		
+		
 
 		//Calculate rotation as a 3D vector (Turning around)
 		float _yRot = Input.GetAxisRaw("Mouse X");
@@ -62,6 +91,7 @@ public class PlayerController : MonoBehaviour {
 		
 		//Apply camera rotation
 		motor.RotateCamera(_cameraRotation);
+		// motor.RotateArm(_cameraRotation);
 
 	}
 }

@@ -16,10 +16,10 @@ public class PlayerSetup : NetworkBehaviour {
 	string dontDrawLayerName = "DontDraw";
 	[SerializeField]
 	GameObject playerGraphics;
-	// [SerializeField]
-	// GameObject playerUIPrefab;
-	// private GameObject playerUIInstance;
-	// PlayerUI playerUI;
+	[SerializeField]
+	GameObject playerUIPrefab;
+	private GameObject playerUIInstance;
+	PlayerUI playerUI;
 	Camera sceneCamera;
 	void Start() {
 		if (!isLocalPlayer) {
@@ -34,15 +34,14 @@ public class PlayerSetup : NetworkBehaviour {
 			//Disable player graphics for local player
 			SetLayerRecursively(playerGraphics, LayerMask.NameToLayer(dontDrawLayerName));
 			//Create Player UI
-			// playerUIInstance = Instantiate(playerUIPrefab);
-			// playerUIInstance.name = playerUIPrefab.name;
-			// playerUI = playerUIInstance.GetComponent<PlayerUI>();
-			// if (playerUI == null) {
-			// 	Debug.Log("No PlayerUI component on playerUI prefab");
-			// }
+			playerUIInstance = Instantiate(playerUIPrefab);
+			playerUIInstance.name = playerUIPrefab.name;
+			playerUI = playerUIInstance.GetComponent<PlayerUI>();
+			if (playerUI == null) {
+				Debug.Log("No PlayerUI component on playerUI prefab");
+			}
+			GetComponent<Player>().PlayerSetup();
 		}
-		GetComponent<Player>().Setup();
-
 	}
 
 	void SetLayerRecursively(GameObject obj, int newLayer){
@@ -70,14 +69,12 @@ public class PlayerSetup : NetworkBehaviour {
     {
       componentsToDisable[i].enabled = false;
     }
-	Player _player = GetComponent<Player>();
+	// Player _player = GetComponent<Player>();
 	// _player.GetComponent.enabled = false;
 	}
 	
 	void OnDisable()
 	{
-		// Destroy(playerUIInstance);
-		// Destroy(playerUI);
 		if (sceneCamera != null) {
 			sceneCamera.gameObject.SetActive(true);
 		}
@@ -85,10 +82,8 @@ public class PlayerSetup : NetworkBehaviour {
 		GameManager.UnRegisterPlayer(transform.name);
 	}
 
-	public void ChangeHealth(int value){
-		// playerUIInstance.GetComponentInChildren<Text>().text = value + "%";
-		// playerUI.UI.GetComponentInChildren<Text>().text = value;
-		// playerUI.ChangeHealth(value);
-
+	public PlayerUI getUI() {
+		return playerUI;
 	}
+
 }
