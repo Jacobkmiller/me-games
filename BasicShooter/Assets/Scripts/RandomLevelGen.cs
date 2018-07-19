@@ -124,6 +124,8 @@ public class RandomLevelGen : NetworkBehaviour {
 		telePlane.GetComponent<Teleporter>().teleportTo = new Vector3(maxDistance, 0f, 0f);
 
 	}
+
+	
 		
 
 
