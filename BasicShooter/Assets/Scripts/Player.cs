@@ -22,7 +22,6 @@ public class Player : NetworkBehaviour {
 	private bool[] wasEnabled;
 	[SerializeField]
 	private Vector3 launchVelocity;
-	private GameObject playerUIInstance;
 	private PlayerUI playerUI;
 	[SerializeField]
 	Camera playerCamera;
@@ -65,10 +64,6 @@ public class Player : NetworkBehaviour {
 			_audiosource.PlayOneShot(_audiosource.clip, 1);
 
 		}
-	}
-
-	public GameObject GetPlayerUIInstance() {
-		return playerUIInstance;
 	}
 
 	public void Update() {
@@ -162,10 +157,6 @@ public class Player : NetworkBehaviour {
 	private IEnumerator ClearVignette(int seconds) {
 		yield return new WaitForSeconds(seconds);
 		deathShadow.enabled = false;
-	}
-
-	public void TogglePauseMenu(){
-		Debug.Log(playerUIInstance.transform.GetChild(2));
 	}
 
 	public void Kill(){

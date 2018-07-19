@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 
-public class Ammo : MonoBehaviour
+public class Ammo : NetworkBehaviour
 {
     public int Damage = 10;
     public int Speed = 100;

@@ -6,9 +6,6 @@ public class Teleporter : MonoBehaviour {
 
 	[SerializeField]
 	public Vector3 teleportTo;
-	private bool isOverlapping = false;
-	private List<Transform> makingContact = new List<Transform>();
-
 	/// <summary>
 	/// OnTriggerExit is called when the Collider other exits the trigger.
 	/// </summary>

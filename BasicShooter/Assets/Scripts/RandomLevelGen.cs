@@ -12,7 +12,7 @@ public class RandomLevelGen : NetworkBehaviour {
 	public GameObject platformPrefab;
 	[SerializeField]
 	private GameObject teleportationPrefab;
-	private Transform env, plats;
+	private Transform plats;
 	private float spawnDistance= 110f;
 	private float maxDistance;
 	[SyncVar]
@@ -23,7 +23,6 @@ public class RandomLevelGen : NetworkBehaviour {
 			Debug.Log(seed);
 		}
 		Random.InitState(seed);
-		env = GameObject.Find("Environment").transform;
 		plats = GameObject.Find("Platforms").transform;
 		maxDistance = averageGap*sideLength+averageGap/randomGapDivisor/2;
 
@@ -87,7 +86,7 @@ public class RandomLevelGen : NetworkBehaviour {
 		}
 		foreach (GameObject pf in platforms) {
 			Vector3 currentPosition = pf.transform.position;
-			Vector3 newPosition = currentPosition + Random.onUnitSphere*Random.RandomRange(0f,averageGap/randomGapDivisor);
+			Vector3 newPosition = currentPosition + Random.onUnitSphere*Random.Range(0f,averageGap/randomGapDivisor);
 			pf.transform.position = newPosition;
 			// pf.transform.SetParent(env);
 		}
@@ -96,13 +95,13 @@ public class RandomLevelGen : NetworkBehaviour {
 	private void DuplicateEnvironments() {
 		GameObject environment = GameObject.Find("Environment");
 		Vector3 clonePosition = new Vector3(-maxDistance, 0, 0);
-		GameObject clone = Instantiate(environment, clonePosition, Quaternion.identity);
+		Instantiate(environment, clonePosition, Quaternion.identity);
 		clonePosition = new Vector3(maxDistance, 0, 0);
-		clone = Instantiate(environment, clonePosition, Quaternion.identity);
+		Instantiate(environment, clonePosition, Quaternion.identity);
 		clonePosition = new Vector3(0, 0, -maxDistance);
-		clone = Instantiate(environment, clonePosition, Quaternion.identity);
+		Instantiate(environment, clonePosition, Quaternion.identity);
 		clonePosition = new Vector3(0, 0, maxDistance);
-		clone = Instantiate(environment, clonePosition, Quaternion.identity);
+		Instantiate(environment, clonePosition, Quaternion.identity);
 	}
 
 	private void SetupTeleportationPlanes() {

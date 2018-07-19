@@ -35,11 +35,6 @@ public class PlayerUI : MonoBehaviour {
 		// Debug.Log(playerUIInstance.transform.Find("PauseMenu").gameObject);
 	}
 
-	public void SetPlayer(Player _player) {
-		player = _player;
-		playerUIInstance = player.GetPlayerUIInstance();
-	}
-
 	public void SetHealth(int value){
 		// GetComponent<Text>().text = value + "%";
 		healthText.text = value + "%";
