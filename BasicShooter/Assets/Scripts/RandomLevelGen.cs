@@ -18,7 +18,8 @@ public class RandomLevelGen : NetworkBehaviour {
 	[SyncVar]
 	private int seed;
 	void Start () {
-		if (Network.isServer){
+		// Debug.Log(NetworkIdentity.isServer);
+		if (this.isServer){
 			seed = Random.Range(1, int.MaxValue);
 			Debug.Log(seed);
 		}
